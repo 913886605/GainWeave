@@ -1,0 +1,15 @@
+# Paths are relative to this config; --data-root is an explicit prepared dataset.
+schema: gainweave-train-v1
+dataset: manifest.json
+model:
+  pretrained: Noel2211/GainWeave
+  revision: v0.1.0
+  vae_source: null
+  local_files_only: false
+  cache_dir: null
+output_dir: ../outputs/train
+seed: 0
+updates: 2048
+checkpoint_every: 128
+# Explicit .pt checkpoint path; requires its SHA256 .pt.json sidecar.
+resume: null

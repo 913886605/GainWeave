@@ -1,0 +1,7 @@
+# Paths are relative to this file; image/mask paths in the manifest are relative
+# to its directory. References must already be in the prediction's relative HDR
+# units and geometry. No per-image fitting or rescaling is performed.
+schema: gainweave-eval-v1
+manifest: ../examples/paired_manifest.json
+output_dir: ../outputs/evaluation
+output_name: metrics.json

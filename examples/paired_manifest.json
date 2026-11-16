@@ -1,0 +1,14 @@
+{
+  "schema": "gainweave-paired-evaluation-v1",
+  "color_space": "linear_rgb",
+  "rows": [
+    {
+      "source_id": "replace_with_your_source",
+      "view_id": "view_001",
+      "method": "GainWeave",
+      "prediction": "your_data/prediction.exr",
+      "reference": "your_data/reference.exr",
+      "EV": 0
+    }
+  ]
+}

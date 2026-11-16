@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite this release."
+type: software
+title: "GainWeave: HDR Image Generation with Frozen Decoder Features and Bounded Residual Gains"
+version: 0.1.0
+date-released: 2026-11-16
+authors:
+  - name: Noel2211
+    website: "https://github.com/913886605"
+repository-code: "https://github.com/913886605/GainWeave"
+url: "https://huggingface.co/Noel2211/GainWeave"
+license: Apache-2.0
+abstract: "GainWeave uses frozen VAE decoder features, a 42,788-parameter HDR bridge, and a 2,769-parameter bounded highlight head. Noel2211 and GitHub user 913886605 identify the same author."

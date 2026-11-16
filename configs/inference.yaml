@@ -1,0 +1,30 @@
+# Reference defaults for the public Python/CLI interfaces. recover/generate use
+# their documented flags; they do not automatically load this YAML file.
+schema: gainweave-inference-defaults-v1
+model:
+  pretrained: Noel2211/GainWeave
+  revision: v0.1.0
+  vae_source: null
+  local_files_only: false
+  cache_dir: null
+device: cuda
+recovery:
+  variant: gainweave
+  dtype: float32
+  input_color_space: srgb
+  native_output_color_space: relative_linear_rgb
+  presentation_ev: 1.0
+  presentation_exr: true
+generation:
+  base_model: Alpha-VLLM/Lumina-Image-2.0
+  base_revision: 53504abd8178b30685b6c4c7a4cd181ff78b73e9
+  seed: 0
+  width: 1024
+  height: 1024
+  steps: 50
+  guidance_scale: 4.0
+  cfg_trunc_ratio: 0.25
+  cfg_normalization: true
+  negative_prompt: ""
+  dtype: bfloat16
+  offload: auto

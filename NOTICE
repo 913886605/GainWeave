@@ -1,0 +1,9 @@
+GainWeave 0.1.0
+Copyright 2026 Noel2211 (GitHub: 913886605)
+
+This distribution contains the original GainWeave code and configuration.
+Its learned bridge and highlight head contain 45,557 parameters in total.
+
+The frozen VAE and optional text-to-image components are obtained separately
+from Alpha-VLLM/Lumina-Image-2.0. Their upstream notices and component terms
+remain applicable. See docs/third_party.md.
