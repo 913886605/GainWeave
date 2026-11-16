@@ -31,7 +31,7 @@ The reference environment is Python 3.12, PyTorch 2.8.0 with CUDA 12.8, Diffuser
 
 ```bash
 # The repository is private during submission preparation; use your authorized GitHub account.
-git clone https://github.com/913886605/GainWeave.git
+git clone --branch v0.1.0 https://github.com/913886605/GainWeave.git
 cd GainWeave
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -139,6 +139,10 @@ gainweave evaluate --config configs/evaluate.yaml
 On the fixed development set of 218 sources, 867 views, and five exposures per view, the learned head reduces hard-clip full-image log1p MAE from **0.033665** for the fixed mild enhancement to **0.029331**, while bright-region MAE changes from **0.654013** to **0.661675**. On soft-compressed inputs, the corresponding full-image MAEs are **0.103860** and **0.104051**. The fixed enhancement and learned head were visually close in the inspected generated examples.
 
 The author accepted +1 EV for overall presentation. This is an overall author assessment, separate from independent human scoring. Generated examples have no paired HDR reference. [Results and interpretation](docs/results.md) includes all four native versions, both input mappings, and the recovery/presentation tradeoffs.
+
+[Release validation](docs/validation.md) records clean-install, GPU, model-download,
+training-interface and evaluation-interface checks. The complete recovery and
+text-generation commands were exercised on an RTX 4090 with 24 GiB VRAM.
 
 ## License and release scope
 

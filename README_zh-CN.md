@@ -6,6 +6,10 @@ GainWeave 使用冻结 VAE 的解码器特征，从 SDR 图像恢复相对线性
 
 **0.1.0** 版本的两个小权重文件共包含 **45,557 个自训参数**。VAE 与文本生成模型由上游单独提供。默认整体呈现使用 **+1 EV**；原生 EXR 保留模型输出，不预乘曝光。
 
+![GainWeave 自生成示例，使用文档规定的 +1 EV 预览变换](examples/preview_plus1ev.png)
+
+上图为显示预览；运行模型会另存 float32 HDR EXR。
+
 ```mermaid
 flowchart LR
     P[文本提示] --> L[冻结 Lumina 生成器]
@@ -27,7 +31,7 @@ flowchart LR
 
 ```bash
 # 投稿准备期间仓库保持私有，使用已获得访问权的 GitHub 账号。
-git clone https://github.com/913886605/GainWeave.git
+git clone --branch v0.1.0 https://github.com/913886605/GainWeave.git
 cd GainWeave
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -40,6 +44,12 @@ python -m pip install -e '.[train,dev]'
 
 ## 下载模型
 
+模型仓库保持私有期间，请先使用有读取权限的账号登录：
+
+```bash
+hf auth login
+```
+
 ```bash
 gainweave download --task recover
 ```
@@ -51,12 +61,6 @@ gainweave download --task generate
 ```
 
 自训权重固定为 `Noel2211/GainWeave@v0.1.0`。上游固定为 `Alpha-VLLM/Lumina-Image-2.0@53504abd8178b30685b6c4c7a4cd181ff78b73e9`。[组件说明](docs/third_party.md)列出 Lumina、Gemma 与 FLUX 来源 VAE 的独立条款；使用者按相应条款获取上游资产。
-
-私有模型仓库需要有读取权限的账号登录：
-
-```bash
-hf auth login
-```
 
 下载模型使用读取权限；上传权限由发布维护者使用。
 
