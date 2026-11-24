@@ -4,7 +4,7 @@
 
 GainWeave 使用冻结 VAE 的解码器特征，从 SDR 图像恢复相对线性 HDR。42,788 参数的桥接模块预测 HDR 基准，2,769 参数的高光头再施加连续、RGB 共享、范围受限的局部残差增益。将相同恢复模块接在 Lumina-Image 2.0 后，即可从文本生成 HDR 图像。
 
-**0.1.0** 版本的两个小权重文件共包含 **45,557 个自训参数**。VAE 与文本生成模型由上游单独提供。默认整体呈现使用 **+1 EV**；原生 EXR 保留模型输出，不预乘曝光。
+Five 的两个权重文件共包含 **45,557 个自训参数**。**0.2.0** 版另含训练后的 One 和 RGB-only 对照及论文评分脚本。VAE 与文本生成模型由上游单独提供。默认整体呈现使用 **+1 EV**；原生 EXR 保留模型输出，不预乘曝光。
 
 ![GainWeave 自生成示例，使用文档规定的 +1 EV 预览变换](examples/preview_plus1ev.png)
 
@@ -25,13 +25,22 @@ flowchart LR
     H --> O
 ```
 
+## 复现论文表 II–IV
+
+在 v0.2.0 代码目录中执行以下命令，CPU 即可从公开的逐例分数重建三张表并计算 Five 相对 RGB-only 的丢失通道误差降幅。
+
+```bash
+python paper/reproduce_tables.py --output paper-results
+```
+
+[复现指南](paper/README.md)给出精确的样本清单、逐像素评分方法，以及 One 和 RGB-only 两个训练对照的使用方式。通用的 `gainweave evaluate` 仍供用户自定义配对数据使用。
+
 ## 安装
 
 参考环境为 Python 3.12、PyTorch 2.8.0/CUDA 12.8、Diffusers 0.35.2、Transformers 4.53.3 与 NumPy 1.26.4。HDR 恢复阶段的 VAE 和自训模块使用 FP32；文本生成使用 BF16，生成 SDR 后进入同一 FP32 恢复路径。
 
 ```bash
-# 投稿准备期间仓库保持私有，使用已获得访问权的 GitHub 账号。
-git clone --branch v0.1.0 https://github.com/913886605/GainWeave.git
+git clone --branch v0.2.0 https://github.com/913886605/GainWeave.git
 cd GainWeave
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -44,11 +53,7 @@ python -m pip install -e '.[train,dev]'
 
 ## 下载模型
 
-模型仓库保持私有期间，请先使用有读取权限的账号登录：
-
-```bash
-hf auth login
-```
+GainWeave 权重已公开。
 
 ```bash
 gainweave download --task recover
@@ -60,7 +65,7 @@ gainweave download --task recover
 gainweave download --task generate
 ```
 
-自训权重固定为 `Noel2211/GainWeave@v0.1.0`。上游固定为 `Alpha-VLLM/Lumina-Image-2.0@53504abd8178b30685b6c4c7a4cd181ff78b73e9`。[组件说明](docs/third_party.md)列出 Lumina、Gemma 与 FLUX 来源 VAE 的独立条款；使用者按相应条款获取上游资产。
+默认 Five 推理权重固定为 `Noel2211/GainWeave@v0.1.0`。上游固定为 `Alpha-VLLM/Lumina-Image-2.0@53504abd8178b30685b6c4c7a4cd181ff78b73e9`。[组件说明](docs/third_party.md)列出 Lumina、Gemma 与 FLUX 来源 VAE 的独立条款；使用者按相应条款获取上游资产。
 
 下载模型使用读取权限；上传权限由发布维护者使用。
 
@@ -142,7 +147,7 @@ gainweave evaluate --config configs/evaluate.yaml
 
 ## 许可与发布范围
 
-原创代码和导出的 GainWeave 参数文件采用 [Apache-2.0](LICENSE)。上游模型保留各自条款，见[第三方说明](docs/third_party.md)。训练数据所涉及的权重发布范围仍作为待补项保留在内部统一权利台账中。投稿准备期间，GitHub 与模型仓库均保持私有，后续可见性由作者决定。
+原创代码和导出的 GainWeave 参数文件采用 [Apache-2.0](LICENSE)。上游模型保留各自条款，见[第三方说明](docs/third_party.md)。训练数据所涉及的权重发布范围仍作为待补项保留在内部统一权利台账中。
 
 ## 引用
 
@@ -153,7 +158,7 @@ gainweave evaluate --config configs/evaluate.yaml
   author = {Noel2211},
   title = {GainWeave: HDR Image Generation with Frozen Decoder Features and Bounded Residual Gains},
   year = {2026},
-  version = {0.1.0},
+  version = {0.2.0},
   url = {https://github.com/913886605/GainWeave}
 }
 ```

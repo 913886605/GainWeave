@@ -4,7 +4,7 @@
 
 GainWeave recovers relative linear HDR from an SDR image using frozen VAE decoder features. A 42,788-parameter bridge predicts an HDR anchor, and a 2,769-parameter highlight head applies a continuous, RGB-shared correction bounded by ±0.5 EV. The same recovery module can follow Lumina-Image 2.0 to generate HDR images from text.
 
-Version **0.1.0** contains **45,557 learned parameters** in two small weight files. The VAE and text-to-image generator remain separate upstream dependencies. The default presentation uses **+1 EV**, while the native EXR retains the model's unscaled output.
+The released Five model contains **45,557 learned parameters** in two small weight files. Version **0.2.0** adds the trained One and RGB-only controls and the paper scoring scripts. The VAE and text-to-image generator remain separate upstream dependencies. The default presentation uses **+1 EV**, while the native EXR retains the model's unscaled output.
 
 ![GainWeave example at +1 EV, shown with the documented SDR preview transform](examples/preview_plus1ev.png)
 
@@ -25,13 +25,22 @@ flowchart LR
     H --> O
 ```
 
+## Reproduce the paper tables
+
+From a v0.2.0 checkout, reproduce Tables II–IV and the Five-versus-RGB lost-channel comparison on CPU from the released per-case scores:
+
+```bash
+python paper/reproduce_tables.py --output paper-results
+```
+
+The [reproduction guide](paper/README.md) links the exact sample manifests, pixel-level scoring and instructions for running the trained One and RGB-only controls. The separate `gainweave evaluate` command serves user-defined paired datasets.
+
 ## Installation
 
 The reference environment is Python 3.12, PyTorch 2.8.0 with CUDA 12.8, Diffusers 0.35.2, Transformers 4.53.3, and NumPy 1.26.4. CUDA recovery uses the VAE and learned modules in FP32. Text generation uses BF16 and then transfers the generated SDR image to the FP32 recovery path.
 
 ```bash
-# The repository is private during submission preparation; use your authorized GitHub account.
-git clone --branch v0.1.0 https://github.com/913886605/GainWeave.git
+git clone --branch v0.2.0 https://github.com/913886605/GainWeave.git
 cd GainWeave
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -44,13 +53,7 @@ OpenCV provides float32 ZIP-compressed EXR I/O through the package's image utili
 
 ## Download models
 
-While the model repository is private, first authenticate with an account that has read access:
-
-```bash
-hf auth login
-```
-
-Reading models needs read permission. Upload permission is used only by the release maintainer.
+The GainWeave models are public.
 
 ```bash
 gainweave download --task recover
@@ -62,7 +65,7 @@ Recovery downloads `bridge.safetensors`, `highlight.safetensors`, and the VAE su
 gainweave download --task generate
 ```
 
-GainWeave weights are pinned to `Noel2211/GainWeave@v0.1.0`. The upstream source is `Alpha-VLLM/Lumina-Image-2.0@53504abd8178b30685b6c4c7a4cd181ff78b73e9`. The [component notes](docs/third_party.md) describe its Lumina, Gemma, and FLUX-derived VAE terms. Each user obtains upstream assets under the applicable terms.
+The default Five inference weights are pinned to `Noel2211/GainWeave@v0.1.0`. The upstream source is `Alpha-VLLM/Lumina-Image-2.0@53504abd8178b30685b6c4c7a4cd181ff78b73e9`. The [component notes](docs/third_party.md) describe its Lumina, Gemma, and FLUX-derived VAE terms. Each user obtains upstream assets under the applicable terms.
 
 ## SDR-to-HDR recovery
 
@@ -146,7 +149,7 @@ text-generation commands were exercised on an RTX 4090 with 24 GiB VRAM.
 
 ## License and release scope
 
-The original code and exported GainWeave parameter files use [Apache-2.0](LICENSE). Upstream models retain their separate terms; [third-party notes](docs/third_party.md) identify the required sources. Training-data weight-release scope remains recorded as an open item in the internal rights ledger. The GitHub and model repositories remain private during submission preparation; the author controls their later visibility.
+The original code and exported GainWeave parameter files use [Apache-2.0](LICENSE). Upstream models retain their separate terms; [third-party notes](docs/third_party.md) identify the required sources. Training-data weight-release scope remains recorded as an open item in the internal rights ledger.
 
 ## Citation
 
@@ -157,7 +160,7 @@ This is a software citation. Noel2211 and GitHub user `913886605` identify the s
   author = {Noel2211},
   title = {GainWeave: HDR Image Generation with Frozen Decoder Features and Bounded Residual Gains},
   year = {2026},
-  version = {0.1.0},
+  version = {0.2.0},
   url = {https://github.com/913886605/GainWeave}
 }
 ```

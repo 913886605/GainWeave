@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gainweave"
-version = "0.1.0"
+version = "0.2.0"
 description = "HDR image generation with frozen decoder features and bounded residual gains"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -33,7 +33,7 @@ Models = "https://huggingface.co/Noel2211/GainWeave"
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "paper/tests"]
 
 [tool.ruff]
 line-length = 100

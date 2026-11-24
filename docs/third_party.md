@@ -24,6 +24,6 @@ Historical comparison records reference [X2HDR](https://github.com/kingnobro/X2H
 
 ## Release record
 
-The unified internal rights ledger retains open questions about training-data weight-release scope and applicable component conditions. The present GitHub and Hugging Face repositories remain private during submission preparation. Their later public visibility is controlled by the author; private staging does not resolve those recorded questions.
+The unified internal rights ledger retains open questions about training-data weight-release scope and applicable component conditions.
 
 The public release files contain no signed EULA, names/addresses/signatures from private receipts, private access-account details, raw personal correspondence, anonymous-review mappings, research-data caches, or training recovery state. Model hashes and generic provenance can be retained without publishing those underlying private materials.

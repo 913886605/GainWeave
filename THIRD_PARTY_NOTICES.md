@@ -15,4 +15,4 @@ highlight parameter files are separate from the frozen upstream models.
 
 See [the complete component and data notes](docs/third_party.md). The private
 research rights ledger retains the outstanding publication/weight-release
-questions; this private engineering delivery does not close them.
+questions concerning training data.

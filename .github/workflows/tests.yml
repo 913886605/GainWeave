@@ -12,5 +12,7 @@ jobs:
       - run: pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
       - run: pip install '.[train,dev]'
       - run: pytest -q
+      - run: python paper/manifests/verify.py
+      - run: python paper/reproduce_tables.py --output "$RUNNER_TEMP/gainweave-paper"
       - run: python -m build
       - run: gainweave --help

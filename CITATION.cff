@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite this release."
 type: software
 title: "GainWeave: HDR Image Generation with Frozen Decoder Features and Bounded Residual Gains"
-version: 0.1.0
-date-released: 2026-11-16
+version: 0.2.0
+date-released: 2026-11-24
 authors:
   - name: Noel2211
     website: "https://github.com/913886605"
